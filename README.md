@@ -24,10 +24,10 @@ Students should refactor this codebase by extracting and organizing code into pr
 4. **Service Layer** (`services/`)
    - Extract business logic
    - Implement duplicate checking
-   - Handle data validation
 
 5. **Controller Layer** (`controllers/`)
    - Extract route handlers
+   - Handle data validation
    - Handle HTTP-specific logic
    - Manage request/response
 
@@ -101,13 +101,13 @@ HTTP Request
          │ router.post('/users', controller.createUser)
          ▼
 ┌─────────────────┐
-│user.controller.ts│ ← Handles HTTP (req/res), calls service
+│user.controller.ts│ ← Handles HTTP (req/res), calls service, validation
 │  (Controller)   │
 └────────┬────────┘
          │ service.createUser(dto)
          ▼
 ┌─────────────────┐
-│ user.service.ts │  ← Business logic, validation, calls repository
+│ user.service.ts │  ← Business logic, calls repository
 │   (Service)     │
 └────────┬────────┘
          │ repository.create(user)
@@ -127,8 +127,8 @@ HTTP Request
 |-------|---------------|--------------|-----------------|
 | **index.ts** | Application setup | Initializes Express, middleware, registers routes | - |
 | **Routes** | URL mapping | Maps HTTP endpoints to controller methods | - |
-| **Controller** | HTTP handling | Parses requests, calls services, formats responses | HTTP Response |
-| **Service** | Business logic | Validates data, checks duplicates, orchestrates operations | Domain objects or errors |
+| **Controller** | HTTP handling | Parses requests, calls services, formats responses, validates data, | HTTP Response |
+| **Service** | Business logic |  Checks duplicates, orchestrates operations | Domain objects or errors |
 | **Repository** | Data access | CRUD operations on data store | Domain objects or undefined |
 | **Types/DTOs** | Data contracts | Defines data structure and validation | - |
 
@@ -142,4 +142,5 @@ HTTP Request
 - Business logic should be framework-agnostic
 
 Good luck refactoring!
+
 
